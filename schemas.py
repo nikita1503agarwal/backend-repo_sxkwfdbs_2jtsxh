@@ -27,6 +27,15 @@ class User(BaseModel):
     age: Optional[int] = Field(None, ge=0, le=120, description="Age in years")
     is_active: bool = Field(True, description="Whether user is active")
 
+class Category(BaseModel):
+    """
+    Categories collection schema
+    Collection name: "category"
+    """
+    name: str = Field(..., description="Category display name")
+    slug: str = Field(..., description="URL-friendly identifier")
+    image: Optional[str] = Field(None, description="Optional image URL for the category")
+
 class Product(BaseModel):
     """
     Products collection schema
@@ -35,7 +44,8 @@ class Product(BaseModel):
     title: str = Field(..., description="Product title")
     description: Optional[str] = Field(None, description="Product description")
     price: float = Field(..., ge=0, description="Price in dollars")
-    category: str = Field(..., description="Product category")
+    category: str = Field(..., description="Product category slug")
+    image: Optional[str] = Field(None, description="Image URL")
     in_stock: bool = Field(True, description="Whether product is in stock")
 
 # Add your own schemas here:
